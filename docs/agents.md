@@ -12,7 +12,9 @@ Owns the user request, scope, integration, permissions, and final result. It dec
 
 Invoke `$tamaos-task-strategist` at the start of a new, ambiguous, multi-domain, or sequencing-heavy request. It turns the goal into acceptance criteria, unknowns, work boundaries, a specialist route, dependencies, and verification evidence.
 
-It is language-independent and sits before implementation. It may route work to the engineer, hardware engineer, common code agent plus a language agent, review coordinator, or a future specialist such as architecture or security/safety. It names a missing capability instead of inventing a skill that is not installed.
+For every new implementation capability, the strategist routes the task through `$tamaos-architecture` before implementation. The task records `not-needed`, `aligned` with its basis, or `user-decision-required`; implementation cannot start while an architecture decision is unresolved.
+
+It is language-independent and sits before implementation. It may route work to the architecture coordinator, engineer, hardware engineer, common code agent plus a language agent, review coordinator, or a future specialist such as security/safety. It names a missing capability instead of inventing a skill that is not installed.
 
 The strategist returns an execution brief to the primary agent. It does not implement, review, mutate external systems, or become the integration owner. An already narrow task with an obvious owner can bypass it.
 
@@ -48,7 +50,7 @@ Invoke `$tamaos-architecture` for consequential design work before implementatio
 
 Each language architect owns idiomatic module boundaries, public contracts, runtime/error/concurrency/resource policy, dependency choices, and test seams for that language. No language architect is registered yet; the Rust language role will provide the first one. Missing language architecture must remain visible rather than being filled with a generic prompt.
 
-Architecture design and architecture review are separate. The language architect shapes a design before implementation; the architecture lane in the three-review gate independently checks the resulting immutable commit.
+Architecture design and architecture review are separate but connected. The language architect issues the pre-implementation clearance. The independent architecture reviewer then consults that architect's recorded clearance and canonical sources and compares the immutable commit against them. A mismatch is returned as a blocking finding with the expected basis, observed implementation, mismatch, and required correction. Neither role may approve a new architecture after the fact: a new decision returns to the user first.
 
 ### Future language agents
 

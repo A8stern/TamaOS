@@ -75,8 +75,8 @@ def validate_reviews(root: Path, commit: str) -> list[str]:
             errors.append(f"invalid review {path.relative_to(root)}: {error}")
             continue
 
-        if report.get("schema") != 2:
-            errors.append(f"{lane}: schema must be 2")
+        if report.get("schema") != 3:
+            errors.append(f"{lane}: schema must be 3")
         if report.get("commit") != commit:
             errors.append(f"{lane}: review is not for current commit {commit}")
         if report.get("lane") != lane:
@@ -131,6 +131,21 @@ def validate_reviews(root: Path, commit: str) -> list[str]:
             errors.append(f"{lane}: unresolved blocking findings")
         if not isinstance(report.get("notes"), list):
             errors.append(f"{lane}: notes must be a list")
+        if lane == "architecture":
+            architect_skill = report.get("architect_skill")
+            if not isinstance(architect_skill, str) or not architect_skill.strip():
+                errors.append(
+                    "architecture: architect_skill must name the consulted architect"
+                )
+            basis = report.get("architecture_basis")
+            if (
+                not isinstance(basis, list)
+                or not basis
+                or any(not isinstance(item, str) or not item.strip() for item in basis)
+            ):
+                errors.append(
+                    "architecture: architecture_basis must contain accepted sources"
+                )
 
     return errors
 

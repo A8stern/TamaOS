@@ -10,12 +10,13 @@ Own code changes from acceptance criteria through verified local commit. Use a l
 ## Workflow
 
 1. Establish observable acceptance criteria, affected callers, risks, and non-goals.
-2. Read the applicable `AGENTS.md` files and existing implementation before choosing an abstraction.
-3. Make the smallest complete change, including affected tests, fixtures, configuration, and documentation.
-4. Run the narrowest useful checks, then the applicable project harness commands.
-5. Commit the complete change locally before review so every reviewer examines the same immutable SHA.
-6. Invoke `$tamaos-code-review`. It must resolve the affected language's complete review profile and run its correctness, architecture, and verification-risk skills in three independent reviewers. Stop if the profile is missing or partial. Resolve every blocking finding; any new commit invalidates all earlier reviews and requires all three skills to run again.
-7. Run `make prepush`. Push only after it passes.
+2. Before implementing a new capability, require an `aligned` architecture clearance with its accepted sources. Stop on `user-decision-required`; do not choose or infer the architecture in code.
+3. Read the applicable `AGENTS.md` files and existing implementation before choosing an abstraction.
+4. Make the smallest complete change, including affected tests, fixtures, configuration, and documentation.
+5. Run the narrowest useful checks, then the applicable project harness commands.
+6. Commit the complete change locally before review so every reviewer examines the same immutable SHA.
+7. Invoke `$tamaos-code-review`. It must resolve the affected language's complete review profile and run its correctness, architecture, and verification-risk skills in three independent reviewers. Stop if the profile is missing or partial. Resolve every blocking finding; any new commit invalidates all earlier reviews and requires all three skills to run again.
+8. Run `make prepush`. Push only after it passes.
 
 ## Ownership boundaries
 

@@ -11,10 +11,12 @@ Convert the user's goal into the smallest coherent execution route. Work across 
 
 1. Read the user request and the canonical project sources relevant to it. Separate stated requirements from assumptions and unresolved decisions.
 2. Define the outcome, observable acceptance criteria, non-goals, risks, and required evidence.
-3. Split work only at real ownership or dependency boundaries. Keep a small task as one task.
-4. Route each part to the narrowest applicable role or skill, including its inputs, expected output, verification, and prerequisites.
-5. Order dependent work and identify only genuinely independent parts that may run in parallel.
-6. Return an execution brief that the primary agent can follow without rediscovering scope.
+3. Decide whether the task creates new behavior, a component, public contract, dependency, storage/communication path, or changes an established boundary or runtime/resource policy. If it does, route it to `$tamaos-architecture` before implementation.
+4. Do not route implementation until architecture returns `aligned` or the user has resolved every `user-decision-required` item and the accepted decision is recorded.
+5. Split work only at real ownership or dependency boundaries. Keep a small task as one task.
+6. Route each part to the narrowest applicable role or skill, including its inputs, expected output, verification, and prerequisites.
+7. Order dependent work and identify only genuinely independent parts that may run in parallel.
+8. Return an execution brief that the primary agent can follow without rediscovering scope.
 
 Use the current routing documented in `AGENTS.md` and `docs/agents.md`. Inspect live skill availability before naming a concrete skill. If a required specialist does not exist yet, name the missing capability instead of inventing a skill ID or silently assigning it to a nearby role.
 
@@ -27,13 +29,14 @@ Outcome:
 Acceptance criteria:
 Known facts:
 Unknowns / decisions:
+Architecture clearance: not-needed | aligned (<sources>) | user-decision-required
 Work route:
   1. owner or skill — concrete deliverable — prerequisite
 Verification:
 Out of scope:
 ```
 
-For each routed item, make the completion boundary explicit. Ask the user only about a decision that materially changes scope, safety, architecture, cost, or external state; otherwise record a reasonable assumption and proceed.
+For each routed item, make the completion boundary explicit. Ask the user about a decision that materially changes scope, safety, architecture, cost, or external state; never replace an unresolved architecture decision with an assumption. Otherwise record a reasonable assumption and proceed.
 
 ## Boundaries
 

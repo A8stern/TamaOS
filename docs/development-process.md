@@ -18,12 +18,15 @@ Outcome:
 Acceptance criteria:
 Known facts:
 Unknowns / risks:
+Architecture clearance: not-needed | aligned (<sources>) | user-decision-required
 Host verification:
 Hardware verification:
 Out of scope:
 ```
 
 If a task touches wiring, include the source for every pin and voltage claim and a pre-power continuity/voltage checklist.
+
+Every new implementation capability goes from task strategy to the affected language architect before coding. If it fits accepted architecture, record `aligned` and the applicable sources. If it requires or contradicts an architectural decision, stop at `user-decision-required`, present the options to the user, and record the accepted decision in architecture documentation or an ADR before implementation.
 
 ## 3. GitHub flow
 
@@ -59,7 +62,7 @@ ci          all non-hardware checks used by GitHub Actions
 
 `flash` must never run as part of `check`, `test`, or `ci`. Do not add placeholder commands before the toolchain spike determines the actual build path.
 
-`make prepush` runs `make ci` and validates local review evidence for the current commit. Evidence must name one language profile, three distinct actual skill IDs for its correctness, architecture, and verification-risk slots, and three distinct reviewer IDs. A missing or partial language profile blocks review; there is no generic fallback. The three reviews are intentionally local and must not be moved into GitHub Actions.
+`make prepush` runs `make ci` and validates local review evidence for the current commit. Evidence must name one language profile, three distinct actual skill IDs for its correctness, architecture, and verification-risk slots, and three distinct reviewer IDs. The architecture report must name the task clearance and accepted architecture sources used for comparison. A mismatch is blocking and returns to implementation; if it exposes a genuinely new decision, it returns to the user before the architecture can change. A missing or partial language profile blocks review; there is no generic fallback. The three reviews are intentionally local and must not be moved into GitHub Actions.
 
 Register projects explicitly in `harness/projects`; never discover and execute arbitrary manifests recursively. The adapter contract and examples live in `harness/README.md`.
 

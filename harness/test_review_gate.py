@@ -30,7 +30,7 @@ class ReviewGateTest(unittest.TestCase):
         review_dir.mkdir(parents=True)
         for index, lane in enumerate(LANES):
             report = {
-                "schema": 2,
+                "schema": 3,
                 "commit": self.commit,
                 "language": "rust",
                 "lane": lane,
@@ -40,6 +40,9 @@ class ReviewGateTest(unittest.TestCase):
                 "blocking_findings": ["bug"] if blocking and index == 0 else [],
                 "notes": [],
             }
+            if lane == "architecture":
+                report["architect_skill"] = "tamaos-rust-architect"
+                report["architecture_basis"] = ["docs/architecture.md"]
             (review_dir / f"{lane}.json").write_text(
                 json.dumps(report), encoding="utf-8"
             )
@@ -115,6 +118,30 @@ class ReviewGateTest(unittest.TestCase):
         self.write_reports(root, blocking=True)
         self.assertIn(
             "correctness: unresolved blocking findings",
+            validate_reviews(root, self.commit),
+        )
+
+    def test_rejects_architecture_review_without_basis(self):
+        root = self.make_root()
+        self.write_reports(root)
+        path = root / ".harness-state" / "reviews" / self.commit / "architecture.json"
+        report = json.loads(path.read_text(encoding="utf-8"))
+        del report["architecture_basis"]
+        path.write_text(json.dumps(report), encoding="utf-8")
+        self.assertIn(
+            "architecture: architecture_basis must contain accepted sources",
+            validate_reviews(root, self.commit),
+        )
+
+    def test_rejects_architecture_review_without_architect(self):
+        root = self.make_root()
+        self.write_reports(root)
+        path = root / ".harness-state" / "reviews" / self.commit / "architecture.json"
+        report = json.loads(path.read_text(encoding="utf-8"))
+        del report["architect_skill"]
+        path.write_text(json.dumps(report), encoding="utf-8")
+        self.assertIn(
+            "architecture: architect_skill must name the consulted architect",
             validate_reviews(root, self.commit),
         )
 

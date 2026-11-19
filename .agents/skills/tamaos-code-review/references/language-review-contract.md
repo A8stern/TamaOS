@@ -26,6 +26,7 @@ Every skill receives the same:
 - acceptance criteria and non-goals;
 - changed files in its language scope;
 - applicable `AGENTS.md`, architecture, and project rules;
+- the task's architecture clearance, accepted architecture sources, and the applicable language architect;
 - language/toolchain version and project adapter when known.
 
 Reviewers are distinct, read-only, run independently, and do not see other reports before finishing. Each reviewer loads only its assigned review skill.
@@ -40,13 +41,15 @@ Route by the claim:
 
 An out-of-lane concern goes in `notes` with the target lane; it is not a blocker until that lane independently confirms it. Style and preference are never blockers unless a scoped repository rule makes them requirements.
 
+The architecture reviewer must consult the language architect's recorded clearance and canonical sources. If the implementation diverges, it returns a blocker with the architecture basis, observed implementation, mismatch, and required correction or user decision. It may ask the architect which accepted decision applies, but neither reviewer nor architect may invent or waive a new decision after implementation; that choice returns to the user.
+
 ## Required report
 
 Each skill returns one JSON object:
 
 ```json
 {
-  "schema": 2,
+  "schema": 3,
   "commit": "<full SHA>",
   "language": "rust",
   "lane": "correctness",
@@ -57,6 +60,8 @@ Each skill returns one JSON object:
   "notes": []
 }
 ```
+
+The architecture report additionally requires `architect_skill` naming the consulted language architect and a non-empty `architecture_basis` list naming the clearance and canonical architecture documents or ADRs used for comparison.
 
 `verdict` is `fail` when blocking findings remain. A new commit invalidates every report.
 

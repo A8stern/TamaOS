@@ -37,4 +37,6 @@ Before substantial work begins in a programming language, its architect must:
 3. record deviations and unknowns;
 4. propose ADRs only for decisions with meaningful trade-offs and reversal cost.
 
+After that checkpoint, every new implementation capability receives a lightweight architecture clearance before coding. Alignment records the applicable sources and review checks. A new or conflicting decision is presented to the user and remains blocked until the accepted choice is recorded.
+
 The language architect contract lives in `.agents/skills/tamaos-architecture/references/language-architect-contract.md`.

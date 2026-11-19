@@ -13,9 +13,25 @@ Coordinate architecture without pretending that one generic agent understands ev
 2. Identify the affected languages and resolve a concrete architect skill for each using [references/language-architect-contract.md](references/language-architect-contract.md).
 3. Stop if an affected language has no architect profile. Name the missing capability; do not improvise a generic language architecture.
 4. Give each language architect the same drivers, constraints, cross-language contracts, non-goals, and decision questions.
-5. Reconcile their outputs at shared boundaries. One integration owner records accepted decisions in the canonical documents.
+5. Reconcile their outputs at shared boundaries and issue an architecture clearance.
+6. One integration owner records accepted decisions in the canonical documents.
 
-Use this workflow at the start of a real language project and for consequential changes with meaningful trade-offs or reversal cost. Ordinary implementation inside established boundaries does not require a new architecture pass.
+Use this workflow at the start of a real language project, for new implementation capabilities, and for consequential changes with meaningful trade-offs or reversal cost. A routine fix or refactor that stays inside an already accepted design may use `not-needed`.
+
+## Architecture clearance
+
+Return one of:
+
+```text
+Architecture status: aligned | user-decision-required
+Architect skill(s):
+Architecture basis:
+Allowed implementation boundary:
+Review checks:
+Unresolved decision and options:
+```
+
+Use `aligned` only when the task fits accepted architecture and the implementation boundary is explicit. If it introduces or contradicts an architectural decision, return `user-decision-required`, explain the options and trade-offs, and stop before implementation. The architect must not choose on the user's behalf. After the user decides, update the canonical architecture or ADR and record that source in the task brief before implementation begins.
 
 ## Expected result
 
@@ -36,4 +52,5 @@ Separate project-wide invariants from language-specific choices. A language arch
 - Do not own toolchain installation, CI, or repository mechanics; `$tamaos-engineer` owns those.
 - Do not own product scope; `$tamaos-task-strategist` frames the task and routes it.
 - Do not replace the architecture lane of `$tamaos-code-review`: design work happens before implementation, review checks an immutable commit afterward.
+- Do not waive a post-implementation architecture mismatch. The code must return for correction, or a genuinely new decision must return to the user and be recorded before another review.
 - Do not create frameworks, layers, or extension points for hypothetical future requirements.

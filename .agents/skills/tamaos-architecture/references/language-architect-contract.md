@@ -34,9 +34,24 @@ Keep this as a maintained language architecture document once the language proje
 
 ## Change work
 
-Invoke the language architect again only when a change alters established boundaries, public contracts, runtime/resource policy, major dependencies, or another decision with meaningful reversal cost. Routine implementation follows the existing architecture.
+Invoke the language architect for every new implementation capability to confirm that it fits the established architecture, and whenever a change alters boundaries, public contracts, runtime/resource policy, major dependencies, or another decision with meaningful reversal cost. Routine fixes and internal refactors may follow the existing architecture without another pass.
 
 For a multi-language decision, each architect owns only its language portion. The common coordinator owns the cross-language contract and makes conflicts explicit; it does not resolve them by silently overriding one architect.
+
+## Review consultation
+
+The language-specific architecture reviewer is independent from the design architect, but must review against the architect's recorded clearance and canonical architecture sources. When those sources are ambiguous, the reviewer asks the language architect to identify the applicable accepted decision; the architect may clarify the basis but may not retroactively waive a divergence.
+
+If implementation differs from the clearance or accepted architecture, the reviewer returns a blocking finding containing:
+
+```text
+Architecture basis:
+Observed implementation:
+Mismatch:
+Required correction or user decision:
+```
+
+If resolving the finding requires a new architectural choice, implementation stops and the choice returns to the user through the architecture coordinator.
 
 ## Registration
 
