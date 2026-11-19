@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Verification Review"
+  short_description: "Audit evidence and risks for one commit"
+  default_prompt: "Use $tamaos-review-verification to audit the evidence and risks for this exact commit."

@@ -31,7 +31,7 @@ If a task touches wiring, include the source for every pin and voltage claim and
 - Require passing checks and one review for firmware changes once CI is available.
 - Prefer squash merging so one issue-sized change becomes one main-branch commit.
 - Use draft pull requests for hardware experiments whose result is not yet known.
-- Before pushing a branch, complete the local three-reviewer gate for the exact commit and run `make prepush`.
+- Before pushing a branch, run the three required review skills in three independent reviewers for the exact commit and run `make prepush`.
 
 Initial labels:
 
@@ -57,7 +57,7 @@ ci          all non-hardware checks used by GitHub Actions
 
 `flash` must never run as part of `check`, `test`, or `ci`. Do not add placeholder commands before the toolchain spike determines the actual build path.
 
-`make prepush` runs `make ci` and validates local review evidence for the current commit. The three reviews are intentionally local and must not be moved into GitHub Actions.
+`make prepush` runs `make ci` and validates local review evidence for the current commit. Evidence must name the required correctness, architecture, and verification skills and three distinct reviewer IDs. The three reviews are intentionally local and must not be moved into GitHub Actions.
 
 Register projects explicitly in `harness/projects`; never discover and execute arbitrary manifests recursively. The adapter contract and examples live in `harness/README.md`.
 

@@ -9,7 +9,12 @@ import sys
 from pathlib import Path
 
 
-LANES = ("correctness", "architecture", "verification-risk")
+REVIEW_SKILLS = {
+    "correctness": "tamaos-review-correctness",
+    "architecture": "tamaos-review-architecture",
+    "verification-risk": "tamaos-review-verification",
+}
+LANES = tuple(REVIEW_SKILLS)
 
 
 def current_commit(root: Path) -> str:
@@ -39,20 +44,24 @@ def validate_reviews(root: Path, commit: str) -> list[str]:
             errors.append(f"invalid review {path.relative_to(root)}: {error}")
             continue
 
-        if report.get("schema") != 1:
-            errors.append(f"{lane}: schema must be 1")
+        if report.get("schema") != 2:
+            errors.append(f"{lane}: schema must be 2")
         if report.get("commit") != commit:
             errors.append(f"{lane}: review is not for current commit {commit}")
         if report.get("lane") != lane:
             errors.append(f"{lane}: lane field does not match filename")
+        if report.get("skill") != REVIEW_SKILLS[lane]:
+            errors.append(f"{lane}: required skill is {REVIEW_SKILLS[lane]}")
 
         reviewer = report.get("reviewer")
         if not isinstance(reviewer, str) or not reviewer.strip():
             errors.append(f"{lane}: reviewer must be a non-empty agent ID")
-        elif reviewer in reviewers:
-            errors.append(f"{lane}: reviewer {reviewer!r} is not independent")
         else:
-            reviewers.add(reviewer)
+            reviewer = reviewer.strip()
+            if reviewer in reviewers:
+                errors.append(f"{lane}: reviewer {reviewer!r} is not independent")
+            else:
+                reviewers.add(reviewer)
 
         if report.get("verdict") != "pass":
             errors.append(f"{lane}: verdict must be pass")

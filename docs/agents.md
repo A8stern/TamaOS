@@ -24,13 +24,13 @@ It owns the electrical contract and physical verification, not firmware implemen
 
 Invoke `$tamaos-code` for language-independent implementation behavior: acceptance criteria, affected callers, minimal complete changes, tests, and handoff into review. Pair it with the applicable language skill.
 
-Every committed change must use `$tamaos-code-review` before push. That skill coordinates three distinct read-only reviewers with non-overlapping ownership:
+Every committed change must use `$tamaos-code-review` before push. It is only the coordinator; three distinct read-only reviewers each invoke a different installed review skill with non-overlapping ownership:
 
-- correctness: behavior and regressions;
-- architecture: boundaries and change cost;
-- verification-risk: evidence and non-functional risk.
+- `$tamaos-review-correctness`: behavior and regressions;
+- `$tamaos-review-architecture`: boundaries and structural cost;
+- `$tamaos-review-verification`: evidence and non-functional risk.
 
-The reviewers inspect the same commit independently and do not see one another's reports. Local evidence plus `make ci` is enforced by `make prepush`; CI does not perform agent review.
+The reviewers inspect the same commit independently, do not see one another's reports, and may not substitute one general review for the three required skills. Local evidence records the skill name as well as the reviewer identity. Evidence plus `make ci` is enforced by `make prepush`; CI does not perform agent review. Upstream provenance is recorded in [review-skill-sources.md](review-skill-sources.md).
 
 ### Future language agents
 

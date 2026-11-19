@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from review_gate import LANES, validate_reviews
+from review_gate import LANES, REVIEW_SKILLS, validate_reviews
 
 
 class ReviewGateTest(unittest.TestCase):
@@ -19,9 +19,10 @@ class ReviewGateTest(unittest.TestCase):
         review_dir.mkdir(parents=True)
         for index, lane in enumerate(LANES):
             report = {
-                "schema": 1,
+                "schema": 2,
                 "commit": self.commit,
                 "lane": lane,
+                "skill": REVIEW_SKILLS[lane],
                 "reviewer": "reviewer-0" if duplicate else f"reviewer-{index}",
                 "verdict": "pass",
                 "blocking_findings": ["bug"] if blocking and index == 0 else [],
@@ -46,6 +47,27 @@ class ReviewGateTest(unittest.TestCase):
         root = self.make_root()
         self.write_reports(root, duplicate=True)
         self.assertTrue(any("not independent" in error for error in validate_reviews(root, self.commit)))
+
+    def test_rejects_whitespace_disguised_duplicate_reviewer(self):
+        root = self.make_root()
+        self.write_reports(root)
+        review_dir = root / ".harness-state" / "reviews" / self.commit
+        report = json.loads((review_dir / "architecture.json").read_text(encoding="utf-8"))
+        report["reviewer"] = " reviewer-0 "
+        (review_dir / "architecture.json").write_text(json.dumps(report), encoding="utf-8")
+        self.assertTrue(any("not independent" in error for error in validate_reviews(root, self.commit)))
+
+    def test_rejects_wrong_review_skill(self):
+        root = self.make_root()
+        self.write_reports(root)
+        path = root / ".harness-state" / "reviews" / self.commit / "correctness.json"
+        report = json.loads(path.read_text(encoding="utf-8"))
+        report["skill"] = "tamaos-review-architecture"
+        path.write_text(json.dumps(report), encoding="utf-8")
+        self.assertIn(
+            "correctness: required skill is tamaos-review-correctness",
+            validate_reviews(root, self.commit),
+        )
 
     def test_rejects_blocking_finding(self):
         root = self.make_root()

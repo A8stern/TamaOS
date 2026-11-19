@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Architecture Review"
+  short_description: "Detect architectural drift in one commit"
+  default_prompt: "Use $tamaos-review-architecture to review this exact commit for architectural drift."

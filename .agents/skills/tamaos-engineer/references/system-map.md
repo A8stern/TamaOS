@@ -55,7 +55,10 @@ GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 - `$tamaos-engineer`: engineering system, integration, architecture process, toolchains, CI, and GitHub.
 - `$tamaos-hardware-engineer`: component identification, electrical constraints, wiring, GPIO selection, measurements, and physical bring-up.
 - `$tamaos-code`: language-independent implementation and test completeness.
-- `$tamaos-code-review`: three independent local review lanes required before push.
+- `$tamaos-code-review`: coordinator for three independent local review skills required before push.
+- `$tamaos-review-correctness`: observable behavior defects and regressions.
+- `$tamaos-review-architecture`: architecture drift, boundaries, and structural cost.
+- `$tamaos-review-verification`: verification evidence and non-functional risk.
 - Future language agents: language/toolchain-specific implementation, beginning with Rust.
 
 The primary agent owns integration and user communication. A specialist returns evidence and recommendations; it does not silently expand scope or mutate external systems.
