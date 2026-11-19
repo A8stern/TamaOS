@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Task Strategist"
+  short_description: "Route complex work to the right specialists"
+  default_prompt: "Use $tamaos-task-strategist to turn this request into a scoped execution route."

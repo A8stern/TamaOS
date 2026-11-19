@@ -8,6 +8,14 @@ TamaOS uses small project skills as specialist roles. `AGENTS.md` contains rules
 
 Owns the user request, scope, integration, permissions, and final result. It decides whether a specialist is useful and verifies specialist output before it becomes project truth.
 
+### Task strategist
+
+Invoke `$tamaos-task-strategist` at the start of a new, ambiguous, multi-domain, or sequencing-heavy request. It turns the goal into acceptance criteria, unknowns, work boundaries, a specialist route, dependencies, and verification evidence.
+
+It is language-independent and sits before implementation. It may route work to the engineer, hardware engineer, common code agent plus a language agent, review coordinator, or a future specialist such as architecture or security/safety. It names a missing capability instead of inventing a skill that is not installed.
+
+The strategist returns an execution brief to the primary agent. It does not implement, review, mutate external systems, or become the integration owner. An already narrow task with an obvious owner can bypass it.
+
 ### TamaOS Engineer
 
 Invoke `$tamaos-engineer` for engineering-system questions: repository structure, harness, CI, GitHub workflow, toolchains, architectural decision process, and reliability.

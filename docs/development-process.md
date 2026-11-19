@@ -9,6 +9,8 @@
 
 ## 2. Work item shape
 
+Use `$tamaos-task-strategist` to create this shape when a request crosses domains, has unclear ownership, or needs sequencing. A narrow task may be routed directly to its owner.
+
 Every implementation issue should contain:
 
 ```text
@@ -93,7 +95,7 @@ The primary agent owns the plan and integration. Delegate only independent resea
 
 For every agent-produced result, the primary agent must verify the cited source or run the relevant check before merging it into project truth.
 
-Role definitions and routing live in `docs/agents.md`. Engineering-system work uses `$tamaos-engineer`; physical hardware work uses `$tamaos-hardware-engineer`; implementation uses `$tamaos-code` plus an applicable language skill; `$tamaos-code-review` owns the mandatory local review gate.
+Role definitions and routing live in `docs/agents.md`. Unclear or multi-domain intake uses `$tamaos-task-strategist`; engineering-system work uses `$tamaos-engineer`; physical hardware work uses `$tamaos-hardware-engineer`; implementation uses `$tamaos-code` plus an applicable language skill; `$tamaos-code-review` owns the mandatory local review gate.
 
 ## 8. Next setup work
 

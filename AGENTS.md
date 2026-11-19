@@ -6,6 +6,7 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 
 ## Context routing
 
+- Use `$tamaos-task-strategist` before implementation when a request is new, ambiguous, multi-domain, or needs ownership and sequencing decisions. Skip it for an already narrow task with an obvious owner.
 - Use `$tamaos-engineer` for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, or engineering reliability.
 - Use `$tamaos-hardware-engineer` for components, datasheets, power, signals, GPIO selection, wiring, measurements, and physical bring-up.
 - Use `$tamaos-code` for implementation, tests, refactors, and bug fixes. Combine it with the applicable language skill.
@@ -28,12 +29,13 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 
 ## Change workflow
 
-1. Restate the acceptance criteria and unknowns.
-2. Inspect existing code and decisions before proposing a new abstraction.
-3. Make one coherent change at a time.
-4. Run the relevant harness commands documented in `docs/development-process.md`.
-5. Commit locally, complete the three-lane review for that exact SHA, and run `make prepush` before pushing.
-6. Report what was verified on the host, what was verified on hardware, and what remains assumed.
+1. For unclear or multi-domain work, use `$tamaos-task-strategist` to establish the execution route.
+2. Restate the acceptance criteria and unknowns.
+3. Inspect existing code and decisions before proposing a new abstraction.
+4. Make one coherent change at a time.
+5. Run the relevant harness commands documented in `docs/development-process.md`.
+6. Commit locally, complete the three-lane review for that exact SHA, and run `make prepush` before pushing.
+7. Report what was verified on the host, what was verified on hardware, and what remains assumed.
 
 ## Architecture boundaries
 
