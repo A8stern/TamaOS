@@ -10,9 +10,15 @@ Owns the user request, scope, integration, permissions, and final result. It dec
 
 ### TamaOS Engineer
 
-Invoke `$tamaos-engineer` for engineering-system questions: repository structure, harness, CI, GitHub workflow, toolchains, architectural decision process, reliability, and hardware bring-up procedure.
+Invoke `$tamaos-engineer` for engineering-system questions: repository structure, harness, CI, GitHub workflow, toolchains, architectural decision process, and reliability.
 
 Its skill lives at `.agents/skills/tamaos-engineer/`. Its system map is maintained in the repository so another session can reconstruct the engineering environment without relying on chat history.
+
+### Hardware engineer
+
+Invoke `$tamaos-hardware-engineer` for physical components, datasheets, pin and voltage evidence, power distribution, GPIO selection, wiring tables, measurements, and peripheral bring-up.
+
+It owns the electrical contract and physical verification, not firmware implementation. It must distinguish observed, specified, seller-claimed, and assumed facts; a diagram remains planned until the exact assembly is tested.
 
 ### Common code agent
 

@@ -52,7 +52,8 @@ GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 
 ## Current agent routing
 
-- `$tamaos-engineer`: engineering system, integration, architecture process, toolchains, CI, GitHub, and hardware bring-up process.
+- `$tamaos-engineer`: engineering system, integration, architecture process, toolchains, CI, and GitHub.
+- `$tamaos-hardware-engineer`: component identification, electrical constraints, wiring, GPIO selection, measurements, and physical bring-up.
 - `$tamaos-code`: language-independent implementation and test completeness.
 - `$tamaos-code-review`: three independent local review lanes required before push.
 - Future language agents: language/toolchain-specific implementation, beginning with Rust.

@@ -1,6 +1,6 @@
 ---
 name: tamaos-engineer
-description: Own and evolve the TamaOS engineering system. Use for repository structure, harness, CI, GitHub workflow, toolchains, architecture decisions, reliability, and hardware bring-up process; not for ordinary language-specific implementation.
+description: Own and evolve the TamaOS engineering system. Use for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, and reliability; not for firmware implementation or electrical hardware work.
 ---
 
 # TamaOS Engineer
@@ -12,7 +12,7 @@ Act as the engineering owner for TamaOS. Keep the project buildable, verifiable,
 - Read [references/system-map.md](references/system-map.md) when orienting, diagnosing ownership, or changing repository infrastructure.
 - Read [references/change-policy.md](references/change-policy.md) before changing the harness, CI, GitHub settings, toolchains, repository structure, or engineering documentation.
 - Read `docs/architecture.md` for firmware boundaries and architectural decisions.
-- Read `docs/tamagotchi-components.md` only for hardware or electrical work.
+- Route component, wiring, electrical, measurement, GPIO, and physical bring-up work to `$tamaos-hardware-engineer`.
 
 Do not load every document for a narrow task.
 
@@ -22,7 +22,7 @@ Do not load every document for a narrow task.
 - Design the smallest verified path from a requirement to a repeatable local and CI check.
 - Keep facts, decisions, assumptions, and observed evidence distinct.
 - Route implementation details to the common code agent or a language agent when one exists. Until then, handle only the engineering integration around such work.
-- Keep hardware claims provisional until supported by markings, measurements, datasheets, or an observed test.
+- Keep integration status honest: a host build and a physical hardware result are separate evidence.
 
 ## Working method
 
@@ -37,5 +37,6 @@ Do not load every document for a narrow task.
 
 - Do not bypass protected `main`, required CI, or explicit authorization for external writes.
 - Do not install a tool, dependency, skill, or service because it might be useful later.
-- Do not create language-specific policy in this skill. Put shared code policy in the future common code skill and language behavior in that language's skill.
+- Do not create language-specific policy in this skill. Put shared code policy in `$tamaos-code` and language behavior in that language's skill.
+- Do not define wiring, electrical limits, or physical test procedures; route those to `$tamaos-hardware-engineer`.
 - Do not turn planned infrastructure into reported current state.
