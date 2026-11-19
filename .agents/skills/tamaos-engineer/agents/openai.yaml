@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Engineer"
+  short_description: "Own the TamaOS engineering system"
+  default_prompt: "Use $tamaos-engineer to assess and evolve the project engineering system."

@@ -90,11 +90,12 @@ The primary agent owns the plan and integration. Delegate only independent resea
 
 For every agent-produced result, the primary agent must verify the cited source or run the relevant check before merging it into project truth.
 
-## 8. First setup backlog
+Role definitions and routing live in `docs/agents.md`. Engineering-system work uses the project skill `$tamaos-engineer`; language-specific rules belong to future language skills rather than this shared process.
 
-1. Connect GitHub and create or link the remote repository.
-2. Initialize Git history and add the initial documentation commit.
-3. Create issue and pull-request templates plus the labels above.
-4. Run the toolchain spike and record the platform decision.
-5. Register the firmware adapter after the toolchain spike and add non-hardware CI.
-6. After parts arrive, create one bring-up issue per peripheral.
+## 8. Next setup work
+
+1. Create the common code agent contract.
+2. Create the Rust language agent and run the toolchain spike.
+3. Record the platform decision and register the real firmware adapter.
+4. Add firmware-specific non-hardware checks to CI.
+5. After parts arrive, create one bring-up issue per peripheral.
