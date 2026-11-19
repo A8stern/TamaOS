@@ -7,11 +7,13 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 ## Context routing
 
 - Use `$tamaos-task-strategist` before implementation when a request is new, ambiguous, multi-domain, or needs ownership and sequencing decisions. Skip it for an already narrow task with an obvious owner.
+- Use `$tamaos-architecture` for consequential boundary, contract, dependency, runtime, or ADR decisions. It must route each affected language to its concrete architect skill; there is no generic language-architecture fallback.
 - Use `$tamaos-engineer` for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, or engineering reliability.
 - Use `$tamaos-hardware-engineer` for components, datasheets, power, signals, GPIO selection, wiring, measurements, and physical bring-up.
 - Use `$tamaos-code` for implementation, tests, refactors, and bug fixes. Combine it with the applicable language skill.
 - Before any push, use `$tamaos-code-review` to run the affected language's registered correctness, architecture, and verification review skills in three independent local reviewers, then run `make prepush`. A complete language review profile is required; CI does not replace this gate.
 - Read `docs/architecture.md` when changing firmware boundaries or making an architectural decision.
+- Read `docs/architecture-principles.md` when establishing or revising a language architecture.
 - Read `docs/development-process.md` when changing the contribution or verification workflow.
 - Read `harness/README.md` when changing commands or registering a project.
 - For hardware work, use `$tamaos-hardware-engineer` and read `docs/tamagotchi-components.md`.

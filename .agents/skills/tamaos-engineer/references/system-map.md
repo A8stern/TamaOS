@@ -9,6 +9,7 @@ Use this as an index, not as a substitute for inspecting live state. When this f
 | Repository-wide agent rules | `AGENTS.md` |
 | Agent roles and routing | `docs/agents.md` |
 | Product and firmware boundaries | `docs/architecture.md` |
+| Shared architecture principles | `docs/architecture-principles.md` |
 | Development and GitHub process | `docs/development-process.md` |
 | Harness contract | `harness/README.md` |
 | Registered executable projects | `harness/projects` |
@@ -54,12 +55,13 @@ GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 ## Current agent routing
 
 - `$tamaos-task-strategist`: language-independent task framing, ownership routing, sequencing, and evidence planning.
+- `$tamaos-architecture`: shared architecture coordinator; requires one concrete architect skill per affected language.
 - `$tamaos-engineer`: engineering system, integration, architecture process, toolchains, CI, and GitHub.
 - `$tamaos-hardware-engineer`: component identification, electrical constraints, wiring, GPIO selection, measurements, and physical bring-up.
 - `$tamaos-code`: language-independent implementation and test completeness.
 - `$tamaos-code-review`: coordinator and common contract for three independent local review slots required before push.
-- Future language agents: language/toolchain-specific implementation and three concrete review skills, beginning with Rust.
+- Future language agents: language/toolchain-specific implementation, one architect skill, and three concrete review skills, beginning with Rust.
 
-No language review profile is registered yet. Until the Rust agent supplies all three actual skill IDs, the local review gate is intentionally incomplete and must not fall back to generic review prompts.
+No language architecture or review profile is registered yet. Until the Rust agent supplies its architect and all three actual review skill IDs, the corresponding workflows are intentionally incomplete and must not fall back to generic prompts.
 
 The primary agent owns integration and user communication. A specialist returns evidence and recommendations; it does not silently expand scope or mutate external systems.

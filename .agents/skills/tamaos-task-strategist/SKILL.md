@@ -38,7 +38,7 @@ For each routed item, make the completion boundary explicit. Ask the user only a
 ## Boundaries
 
 - Do not implement code, edit hardware designs, perform reviews, or mutate GitHub as the strategist.
-- Do not choose architecture; route consequential design choices to the architecture role when it exists and identify when an ADR is warranted.
+- Do not choose architecture; route consequential design choices to `$tamaos-architecture` and identify when an ADR is warranted.
 - Do not choose language idioms or concrete language review skills; route those to the affected language profile.
 - Do not treat security or physical safety as ordinary implementation details. Mark the risk and route it to the appropriate specialist when available.
 - Do not delegate merely to create activity. One integration owner remains accountable for the result, and parallel work must not edit overlapping files.

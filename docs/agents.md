@@ -42,13 +42,17 @@ These are contracts for future language-specific skills, not generic TamaOS revi
 
 The reviewers inspect the same commit independently, do not see one another's reports, and may not substitute one general review for the three required skills. Local evidence records the language, actual skill ID, and reviewer identity. Evidence plus `make ci` is enforced by `make prepush`; CI does not perform agent review. The complete contract lives in `.agents/skills/tamaos-code-review/references/language-review-contract.md`.
 
+### Architecture coordinator and language architects
+
+Invoke `$tamaos-architecture` for consequential design work before implementation. It applies the shared principles in `docs/architecture-principles.md`, identifies affected languages, and requires one concrete architect skill per language. It coordinates cross-language contracts but is not itself a generic language architect.
+
+Each language architect owns idiomatic module boundaries, public contracts, runtime/error/concurrency/resource policy, dependency choices, and test seams for that language. No language architect is registered yet; the Rust language role will provide the first one. Missing language architecture must remain visible rather than being filled with a generic prompt.
+
+Architecture design and architecture review are separate. The language architect shapes a design before implementation; the architecture lane in the three-review gate independently checks the resulting immutable commit.
+
 ### Future language agents
 
-Will add only language-specific knowledge, commands, and a complete three-skill review profile. The first planned language role is Rust. A language agent must use the common code contract and the project `.harness` adapter rather than creating another workflow.
-
-### Proposed architecture agent
-
-Should own cross-component design exploration, alternatives, ADR recommendations, and dependency boundaries. It should not own CI/toolchains (engineer), implementation (code agent), or language idioms (language agent).
+Will add language-specific implementation knowledge, commands, one architect skill, and a complete three-skill review profile. The first planned language role is Rust. A language agent must use the common code and architecture contracts plus the project `.harness` adapter rather than creating another workflow.
 
 ## Delegation contract
 

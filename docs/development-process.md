@@ -95,12 +95,11 @@ The primary agent owns the plan and integration. Delegate only independent resea
 
 For every agent-produced result, the primary agent must verify the cited source or run the relevant check before merging it into project truth.
 
-Role definitions and routing live in `docs/agents.md`. Unclear or multi-domain intake uses `$tamaos-task-strategist`; engineering-system work uses `$tamaos-engineer`; physical hardware work uses `$tamaos-hardware-engineer`; implementation uses `$tamaos-code` plus an applicable language skill; `$tamaos-code-review` owns the mandatory local review gate.
+Role definitions and routing live in `docs/agents.md`. Unclear or multi-domain intake uses `$tamaos-task-strategist`; consequential design uses `$tamaos-architecture` plus each affected language architect; engineering-system work uses `$tamaos-engineer`; physical hardware work uses `$tamaos-hardware-engineer`; implementation uses `$tamaos-code` plus an applicable language skill; `$tamaos-code-review` owns the mandatory local review gate.
 
 ## 8. Next setup work
 
-1. Create the architecture agent.
-2. Create the Rust language agent, register its three-skill review profile, and run the toolchain spike.
-3. Record the platform decision and register the real firmware adapter.
-4. Add firmware-specific non-hardware checks to CI.
-5. After parts arrive, create one bring-up issue per peripheral.
+1. Create the Rust language agent, its architect skill, and its three-skill review profile; then run the toolchain spike.
+2. Record the platform decision and register the real firmware adapter.
+3. Add firmware-specific non-hardware checks to CI.
+4. After parts arrive, create one bring-up issue per peripheral.
