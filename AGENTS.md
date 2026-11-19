@@ -4,11 +4,14 @@
 
 TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 N16R8 and written in Rust. The first milestone is a safe, breadboard-based prototype with an ST7789V display, rotary encoder, buttons, and a passive buzzer.
 
-## Read before changing anything
+## Context routing
 
-1. Read `README.md`.
-2. Read `docs/architecture.md` and `docs/development-process.md`.
-3. For hardware work, also read `docs/tamagotchi-components.md`.
+- Use `$tamaos-engineer` for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, reliability, or hardware bring-up planning.
+- Read `docs/architecture.md` when changing firmware boundaries or making an architectural decision.
+- Read `docs/development-process.md` when changing the contribution or verification workflow.
+- Read `harness/README.md` when changing commands or registering a project.
+- For hardware work, read `docs/tamagotchi-components.md`.
+- Agent roles and delegation boundaries are documented in `docs/agents.md`.
 
 ## Non-negotiable rules
 
