@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Code"
+  short_description: "Implement code across TamaOS projects"
+  default_prompt: "Use $tamaos-code to implement and verify this code change."

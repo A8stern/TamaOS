@@ -16,6 +16,8 @@ Actions:
   test       run harness tests and project tests
   build      build registered projects
   ci         run check, test, and build without hardware access
+  review     validate three local independent review reports
+  prepush    run ci and the local review gate
   firmware   build firmware through the selected project harness
   size       report size through the selected project harness
   flash      flash the selected project; PROJECT is required
@@ -44,6 +46,8 @@ case "$action" in
         exit 1
       }
     done
+    git -C "$root" config core.hooksPath .githooks
+    echo "Configured local Git hooks from .githooks."
     ;;
   check)
     python3 "$root/harness/check_repo.py" "$root"

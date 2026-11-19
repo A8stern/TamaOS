@@ -31,6 +31,7 @@ If a task touches wiring, include the source for every pin and voltage claim and
 - Require passing checks and one review for firmware changes once CI is available.
 - Prefer squash merging so one issue-sized change becomes one main-branch commit.
 - Use draft pull requests for hardware experiments whose result is not yet known.
+- Before pushing a branch, complete the local three-reviewer gate for the exact commit and run `make prepush`.
 
 Initial labels:
 
@@ -55,6 +56,8 @@ ci          all non-hardware checks used by GitHub Actions
 ```
 
 `flash` must never run as part of `check`, `test`, or `ci`. Do not add placeholder commands before the toolchain spike determines the actual build path.
+
+`make prepush` runs `make ci` and validates local review evidence for the current commit. The three reviews are intentionally local and must not be moved into GitHub Actions.
 
 Register projects explicitly in `harness/projects`; never discover and execute arbitrary manifests recursively. The adapter contract and examples live in `harness/README.md`.
 
@@ -90,11 +93,11 @@ The primary agent owns the plan and integration. Delegate only independent resea
 
 For every agent-produced result, the primary agent must verify the cited source or run the relevant check before merging it into project truth.
 
-Role definitions and routing live in `docs/agents.md`. Engineering-system work uses the project skill `$tamaos-engineer`; language-specific rules belong to future language skills rather than this shared process.
+Role definitions and routing live in `docs/agents.md`. Engineering-system work uses `$tamaos-engineer`; implementation uses `$tamaos-code` plus an applicable language skill; `$tamaos-code-review` owns the mandatory local review gate.
 
 ## 8. Next setup work
 
-1. Create the common code agent contract.
+1. Create the architecture agent.
 2. Create the Rust language agent and run the toolchain spike.
 3. Record the platform decision and register the real firmware adapter.
 4. Add firmware-specific non-hardware checks to CI.

@@ -42,7 +42,9 @@ human / agent / CI
       `-> repository checks and harness unit tests
 ```
 
-The stable root commands are `make setup`, `make check`, `make test`, `make build`, and `make ci`. Hardware operations require an explicit project. `flash` and `monitor` must never run from CI.
+The stable root commands are `make setup`, `make check`, `make test`, `make build`, and `make ci`. `make review` validates three local review reports and `make prepush` combines that gate with `make ci`. Hardware operations require an explicit project. `flash` and `monitor` must never run from CI.
+
+`make setup` enables the tracked local pre-push hook. Review evidence is stored under ignored `.harness-state/` and is never produced by CI.
 
 The project registry is currently empty because no firmware workspace or verified toolchain exists yet. The first real project is expected to be the ESP32-S3 firmware after the toolchain spike.
 
@@ -51,7 +53,8 @@ GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 ## Current agent routing
 
 - `$tamaos-engineer`: engineering system, integration, architecture process, toolchains, CI, GitHub, and hardware bring-up process.
-- Future common code agent: language-independent implementation and review rules.
+- `$tamaos-code`: language-independent implementation and test completeness.
+- `$tamaos-code-review`: three independent local review lanes required before push.
 - Future language agents: language/toolchain-specific implementation, beginning with Rust.
 
 The primary agent owns integration and user communication. A specialist returns evidence and recommendations; it does not silently expand scope or mutate external systems.

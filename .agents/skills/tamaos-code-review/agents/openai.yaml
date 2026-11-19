@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Code Review"
+  short_description: "Run three independent local reviews"
+  default_prompt: "Use $tamaos-code-review to run the required three-lane local review."

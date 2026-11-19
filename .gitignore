@@ -16,3 +16,6 @@ sdkconfig.old
 .env
 .env.*
 !.env.example
+
+# Local review evidence
+.harness-state/

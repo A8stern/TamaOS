@@ -7,6 +7,8 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 ## Context routing
 
 - Use `$tamaos-engineer` for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, reliability, or hardware bring-up planning.
+- Use `$tamaos-code` for implementation, tests, refactors, and bug fixes. Combine it with the applicable language skill.
+- Before any push, use `$tamaos-code-review` for three independent local reviews and run `make prepush`. CI does not replace this gate.
 - Read `docs/architecture.md` when changing firmware boundaries or making an architectural decision.
 - Read `docs/development-process.md` when changing the contribution or verification workflow.
 - Read `harness/README.md` when changing commands or registering a project.
@@ -29,7 +31,8 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 2. Inspect existing code and decisions before proposing a new abstraction.
 3. Make one coherent change at a time.
 4. Run the relevant harness commands documented in `docs/development-process.md`.
-5. Report what was verified on the host, what was verified on hardware, and what remains assumed.
+5. Commit locally, complete the three-lane review for that exact SHA, and run `make prepush` before pushing.
+6. Report what was verified on the host, what was verified on hardware, and what remains assumed.
 
 ## Architecture boundaries
 
