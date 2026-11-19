@@ -1,0 +1,40 @@
+name: Work item
+description: Feature, fix, spike, tooling, or documentation work
+title: ""
+labels: []
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: Describe the observable result, not the implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List concrete conditions that make this issue complete.
+    validations:
+      required: true
+  - type: textarea
+    id: facts
+    attributes:
+      label: Known facts
+      description: Link repository documents, datasheets, or prior decisions.
+  - type: textarea
+    id: unknowns
+    attributes:
+      label: Unknowns and risks
+      description: Include assumptions that must not silently become project truth.
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification plan
+      description: Separate host checks from hardware checks.
+    validations:
+      required: true
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope

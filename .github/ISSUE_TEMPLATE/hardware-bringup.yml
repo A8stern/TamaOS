@@ -1,0 +1,40 @@
+name: Hardware bring-up
+description: Verify one physical component or electrical path
+title: "[bring-up] "
+labels:
+  - "area:hardware"
+  - "status:needs-verification"
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Exact component
+      description: Include observed markings and board revision.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Photos, datasheets, seller documentation, and continuity measurements.
+    validations:
+      required: true
+  - type: textarea
+    id: pre_power
+    attributes:
+      label: Pre-power checklist
+      description: Pin mapping, expected voltage, common ground, shorts, and current path.
+    validations:
+      required: true
+  - type: textarea
+    id: procedure
+    attributes:
+      label: Test procedure
+      description: Smallest safe test and expected observation.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Observed result
+      description: Fill this after the test; distinguish measurement from inference.
