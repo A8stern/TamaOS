@@ -9,12 +9,7 @@ import sys
 from pathlib import Path
 
 
-REVIEW_SKILLS = {
-    "correctness": "tamaos-review-correctness",
-    "architecture": "tamaos-review-architecture",
-    "verification-risk": "tamaos-review-verification",
-}
-LANES = tuple(REVIEW_SKILLS)
+LANES = ("correctness", "architecture", "verification-risk")
 
 
 def current_commit(root: Path) -> str:
@@ -28,10 +23,46 @@ def current_commit(root: Path) -> str:
     return result.stdout.strip()
 
 
+def load_profiles(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
+    path = root / "harness" / "review-profiles.json"
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        return {}, [f"invalid review profile registry: {error}"]
+
+    if document.get("schema") != 1 or not isinstance(document.get("languages"), dict):
+        return {}, ["review profile registry must use schema 1 and contain languages"]
+
+    profiles: dict[str, dict[str, str]] = {}
+    errors: list[str] = []
+    for language, profile in document["languages"].items():
+        if not isinstance(language, str) or not language.strip():
+            errors.append("review profile language IDs must be non-empty strings")
+            continue
+        if not isinstance(profile, dict):
+            errors.append(f"review profile {language!r} must be an object")
+            continue
+        if set(profile) != set(LANES):
+            errors.append(f"review profile {language!r} must define exactly {LANES}")
+            continue
+        skills = tuple(profile[lane] for lane in LANES)
+        if any(not isinstance(skill, str) or not skill.strip() for skill in skills):
+            errors.append(f"review profile {language!r} skill IDs must be non-empty strings")
+            continue
+        normalized = tuple(skill.strip() for skill in skills)
+        if len(set(normalized)) != len(LANES):
+            errors.append(f"review profile {language!r} skill IDs must be distinct")
+            continue
+        profiles[language.strip()] = dict(zip(LANES, normalized))
+    return profiles, errors
+
+
 def validate_reviews(root: Path, commit: str) -> list[str]:
     review_dir = root / ".harness-state" / "reviews" / commit
-    errors: list[str] = []
+    profiles, errors = load_profiles(root)
     reviewers: set[str] = set()
+    skills: set[str] = set()
+    language: str | None = None
 
     for lane in LANES:
         path = review_dir / f"{lane}.json"
@@ -50,8 +81,36 @@ def validate_reviews(root: Path, commit: str) -> list[str]:
             errors.append(f"{lane}: review is not for current commit {commit}")
         if report.get("lane") != lane:
             errors.append(f"{lane}: lane field does not match filename")
-        if report.get("skill") != REVIEW_SKILLS[lane]:
-            errors.append(f"{lane}: required skill is {REVIEW_SKILLS[lane]}")
+
+        expected_skill: str | None = None
+        report_language = report.get("language")
+        if not isinstance(report_language, str) or not report_language.strip():
+            errors.append(f"{lane}: language must be a non-empty ID")
+        else:
+            report_language = report_language.strip()
+            expected_skill = profiles.get(report_language, {}).get(lane)
+            if language is None:
+                language = report_language
+                if report_language not in profiles:
+                    errors.append(
+                        f"{lane}: language {report_language!r} has no registered review profile"
+                    )
+            elif report_language != language:
+                errors.append(f"{lane}: language profile does not match {language!r}")
+
+        skill = report.get("skill")
+        if not isinstance(skill, str) or not skill.strip():
+            errors.append(f"{lane}: skill must be a non-empty ID")
+        else:
+            skill = skill.strip()
+            if skill in skills:
+                errors.append(f"{lane}: skill {skill!r} is not distinct")
+            else:
+                skills.add(skill)
+            if expected_skill is not None and skill != expected_skill:
+                errors.append(
+                    f"{lane}: registered skill is {expected_skill!r}, got {skill!r}"
+                )
 
         reviewer = report.get("reviewer")
         if not isinstance(reviewer, str) or not reviewer.strip():

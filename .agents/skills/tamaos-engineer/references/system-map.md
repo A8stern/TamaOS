@@ -12,6 +12,7 @@ Use this as an index, not as a substitute for inspecting live state. When this f
 | Development and GitHub process | `docs/development-process.md` |
 | Harness contract | `harness/README.md` |
 | Registered executable projects | `harness/projects` |
+| Registered language review profiles | `harness/review-profiles.json` |
 | Hardware facts and unknowns | `docs/tamagotchi-components.md` |
 | Work scope and temporary status | GitHub issue or pull request |
 | Observed automated verification | local command output and GitHub Actions |
@@ -55,10 +56,9 @@ GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 - `$tamaos-engineer`: engineering system, integration, architecture process, toolchains, CI, and GitHub.
 - `$tamaos-hardware-engineer`: component identification, electrical constraints, wiring, GPIO selection, measurements, and physical bring-up.
 - `$tamaos-code`: language-independent implementation and test completeness.
-- `$tamaos-code-review`: coordinator for three independent local review skills required before push.
-- `$tamaos-review-correctness`: observable behavior defects and regressions.
-- `$tamaos-review-architecture`: architecture drift, boundaries, and structural cost.
-- `$tamaos-review-verification`: verification evidence and non-functional risk.
-- Future language agents: language/toolchain-specific implementation, beginning with Rust.
+- `$tamaos-code-review`: coordinator and common contract for three independent local review slots required before push.
+- Future language agents: language/toolchain-specific implementation and three concrete review skills, beginning with Rust.
+
+No language review profile is registered yet. Until the Rust agent supplies all three actual skill IDs, the local review gate is intentionally incomplete and must not fall back to generic review prompts.
 
 The primary agent owns integration and user communication. A specialist returns evidence and recommendations; it does not silently expand scope or mutate external systems.

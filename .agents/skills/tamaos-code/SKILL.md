@@ -14,7 +14,7 @@ Own code changes from acceptance criteria through verified local commit. Use a l
 3. Make the smallest complete change, including affected tests, fixtures, configuration, and documentation.
 4. Run the narrowest useful checks, then the applicable project harness commands.
 5. Commit the complete change locally before review so every reviewer examines the same immutable SHA.
-6. Invoke `$tamaos-code-review`. It must run the correctness, architecture, and verification review skills in three independent reviewers. Resolve every blocking finding; any new commit invalidates all earlier reviews and requires all three skills to run again.
+6. Invoke `$tamaos-code-review`. It must resolve the affected language's complete review profile and run its correctness, architecture, and verification-risk skills in three independent reviewers. Stop if the profile is missing or partial. Resolve every blocking finding; any new commit invalidates all earlier reviews and requires all three skills to run again.
 7. Run `make prepush`. Push only after it passes.
 
 ## Ownership boundaries

@@ -31,7 +31,7 @@ If a task touches wiring, include the source for every pin and voltage claim and
 - Require passing checks and one review for firmware changes once CI is available.
 - Prefer squash merging so one issue-sized change becomes one main-branch commit.
 - Use draft pull requests for hardware experiments whose result is not yet known.
-- Before pushing a branch, run the three required review skills in three independent reviewers for the exact commit and run `make prepush`.
+- Before pushing a branch, run the affected language profile's three required review skills in three independent reviewers for the exact commit and run `make prepush`.
 
 Initial labels:
 
@@ -57,7 +57,7 @@ ci          all non-hardware checks used by GitHub Actions
 
 `flash` must never run as part of `check`, `test`, or `ci`. Do not add placeholder commands before the toolchain spike determines the actual build path.
 
-`make prepush` runs `make ci` and validates local review evidence for the current commit. Evidence must name the required correctness, architecture, and verification skills and three distinct reviewer IDs. The three reviews are intentionally local and must not be moved into GitHub Actions.
+`make prepush` runs `make ci` and validates local review evidence for the current commit. Evidence must name one language profile, three distinct actual skill IDs for its correctness, architecture, and verification-risk slots, and three distinct reviewer IDs. A missing or partial language profile blocks review; there is no generic fallback. The three reviews are intentionally local and must not be moved into GitHub Actions.
 
 Register projects explicitly in `harness/projects`; never discover and execute arbitrary manifests recursively. The adapter contract and examples live in `harness/README.md`.
 
@@ -98,7 +98,7 @@ Role definitions and routing live in `docs/agents.md`. Engineering-system work u
 ## 8. Next setup work
 
 1. Create the architecture agent.
-2. Create the Rust language agent and run the toolchain spike.
+2. Create the Rust language agent, register its three-skill review profile, and run the toolchain spike.
 3. Record the platform decision and register the real firmware adapter.
 4. Add firmware-specific non-hardware checks to CI.
 5. After parts arrive, create one bring-up issue per peripheral.

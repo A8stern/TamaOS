@@ -24,17 +24,19 @@ It owns the electrical contract and physical verification, not firmware implemen
 
 Invoke `$tamaos-code` for language-independent implementation behavior: acceptance criteria, affected callers, minimal complete changes, tests, and handoff into review. Pair it with the applicable language skill.
 
-Every committed change must use `$tamaos-code-review` before push. It is only the coordinator; three distinct read-only reviewers each invoke a different installed review skill with non-overlapping ownership:
+Every committed change must use `$tamaos-code-review` before push. It is only the coordinator. The affected programming language must provide a complete review profile containing three distinct skills with non-overlapping ownership:
 
-- `$tamaos-review-correctness`: behavior and regressions;
-- `$tamaos-review-architecture`: boundaries and structural cost;
-- `$tamaos-review-verification`: evidence and non-functional risk.
+- correctness: language semantics, behavior, and regressions;
+- architecture: language/ecosystem boundaries and structural cost;
+- verification-risk: native checks, evidence, and non-functional risk.
 
-The reviewers inspect the same commit independently, do not see one another's reports, and may not substitute one general review for the three required skills. Local evidence records the skill name as well as the reviewer identity. Evidence plus `make ci` is enforced by `make prepush`; CI does not perform agent review. Upstream provenance is recorded in [review-skill-sources.md](review-skill-sources.md).
+These are contracts for future language-specific skills, not generic TamaOS review skills. For example, the Rust profile will later name three actual Rust review skills; Python or TypeScript profiles may name different ones. Do not invent a fallback or pass a partial profile.
+
+The reviewers inspect the same commit independently, do not see one another's reports, and may not substitute one general review for the three required skills. Local evidence records the language, actual skill ID, and reviewer identity. Evidence plus `make ci` is enforced by `make prepush`; CI does not perform agent review. The complete contract lives in `.agents/skills/tamaos-code-review/references/language-review-contract.md`.
 
 ### Future language agents
 
-Will add only language-specific knowledge and commands. The first planned language role is Rust. A language agent must use the common code contract and the project `.harness` adapter rather than creating another workflow.
+Will add only language-specific knowledge, commands, and a complete three-skill review profile. The first planned language role is Rust. A language agent must use the common code contract and the project `.harness` adapter rather than creating another workflow.
 
 ### Proposed architecture agent
 

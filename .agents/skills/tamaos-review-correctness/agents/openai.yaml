@@ -1,4 +1,0 @@
-interface:
-  display_name: "TamaOS Correctness Review"
-  short_description: "Find concrete behavior defects in one commit"
-  default_prompt: "Use $tamaos-review-correctness to review this exact commit for observable correctness defects."
