@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Hardware Engineer"
+  short_description: "Verify and integrate TamaOS hardware safely"
+  default_prompt: "Use $tamaos-hardware-engineer to verify these components and plan a safe hardware bring-up."

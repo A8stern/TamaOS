@@ -8,19 +8,55 @@ TamaOS uses small project skills as specialist roles. `AGENTS.md` contains rules
 
 Owns the user request, scope, integration, permissions, and final result. It decides whether a specialist is useful and verifies specialist output before it becomes project truth.
 
+### Task strategist
+
+Invoke `$tamaos-task-strategist` at the start of a new, ambiguous, multi-domain, or sequencing-heavy request. It turns the goal into acceptance criteria, unknowns, work boundaries, a specialist route, dependencies, and verification evidence.
+
+For every new implementation capability, the strategist routes the task through `$tamaos-architecture` before implementation. The task records `not-needed`, `aligned` with its basis, or `user-decision-required`; implementation cannot start while an architecture decision is unresolved.
+
+It is language-independent and sits before implementation. It may route work to the architecture coordinator, engineer, hardware engineer, common code agent plus a language agent, review coordinator, or a future specialist such as security/safety. It names a missing capability instead of inventing a skill that is not installed.
+
+The strategist returns an execution brief to the primary agent. It does not implement, review, mutate external systems, or become the integration owner. An already narrow task with an obvious owner can bypass it.
+
 ### TamaOS Engineer
 
-Invoke `$tamaos-engineer` for engineering-system questions: repository structure, harness, CI, GitHub workflow, toolchains, architectural decision process, reliability, and hardware bring-up procedure.
+Invoke `$tamaos-engineer` for engineering-system questions: repository structure, harness, CI, GitHub workflow, toolchains, architectural decision process, and reliability.
 
 Its skill lives at `.agents/skills/tamaos-engineer/`. Its system map is maintained in the repository so another session can reconstruct the engineering environment without relying on chat history.
 
-### Future common code agent
+### Hardware engineer
 
-Will own language-independent implementation behavior: understanding acceptance criteria, changing code, testing, reviewing, and handing work back to the engineer for integration. It does not exist yet.
+Invoke `$tamaos-hardware-engineer` for physical components, datasheets, pin and voltage evidence, power distribution, GPIO selection, wiring tables, measurements, and peripheral bring-up.
 
-### Future language agents
+It owns the electrical contract and physical verification, not firmware implementation. It must distinguish observed, specified, seller-claimed, and assumed facts; a diagram remains planned until the exact assembly is tested.
 
-Will add only language-specific knowledge and commands. The first planned language role is Rust. A language agent must use the common code contract and the project `.harness` adapter rather than creating another workflow.
+### Common code agent
+
+Invoke `$tamaos-code` for language-independent implementation behavior: acceptance criteria, affected callers, minimal complete changes, tests, and handoff into review. Pair it with the applicable language skill.
+
+Every committed change must use `$tamaos-code-review` before push. It is only the coordinator. The affected programming language must provide a complete review profile containing three distinct skills with non-overlapping ownership:
+
+- correctness: language semantics, behavior, and regressions;
+- architecture: language/ecosystem boundaries and structural cost;
+- verification-risk: native checks, evidence, and non-functional risk.
+
+These are contracts for future language-specific skills, not generic TamaOS review skills. For example, the Rust profile will later name three actual Rust review skills; Python or TypeScript profiles may name different ones. Do not invent a fallback or pass a partial profile.
+
+The reviewers inspect the same commit independently, do not see one another's reports, and may not substitute one general review for the three required skills. Local evidence records the language, actual skill ID, and reviewer identity. Evidence plus `make ci` is enforced by `make prepush`; CI does not perform agent review. The complete contract lives in `.agents/skills/tamaos-code-review/references/language-review-contract.md`.
+
+### Architecture coordinator and language architects
+
+Invoke `$tamaos-architecture` for consequential design work before implementation. It applies the shared principles in `docs/architecture-principles.md`, identifies affected languages, and requires one concrete architect skill per language. It coordinates cross-language contracts but is not itself a generic language architect.
+
+Each language architect owns idiomatic module boundaries, public contracts, runtime/error/concurrency/resource policy, dependency choices, and test seams for that language. Rust uses `$tamaos-rust-architect`. Missing language architecture must remain visible rather than being filled with a generic prompt.
+
+Architecture design and architecture review are separate but connected. The language architect issues the pre-implementation clearance. The independent architecture reviewer then consults that architect's recorded clearance and canonical sources and compares the immutable commit against them. A mismatch is returned as a blocking finding with the expected basis, observed implementation, mismatch, and required correction. Neither role may approve a new architecture after the fact: a new decision returns to the user first.
+
+### Rust language agents
+
+Rust implementation uses `$tamaos-rust` with `$tamaos-code`. Architecture uses `$tamaos-rust-architect`. The local review profile uses `$tamaos-rust-review-correctness`, `$tamaos-rust-review-architecture`, and `$tamaos-rust-review-verification`. Their selected upstream sources and pinned revisions are recorded in `docs/rust-skill-sources.md`.
+
+Future language agents must provide the same four language-specific roles and use the common code and architecture contracts plus a project `.harness` adapter rather than creating another workflow.
 
 ## Delegation contract
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Rust Architecture Review"
+  short_description: "Check Rust against approved architecture"
+  default_prompt: "Use $tamaos-rust-review-architecture for the architecture lane of this immutable commit."

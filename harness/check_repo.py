@@ -12,7 +12,7 @@ from urllib.parse import unquote
 
 
 TEXT_SUFFIXES = {".md", ".py", ".rs", ".sh", ".toml", ".yml", ".yaml", ".json"}
-IGNORED_DIRS = {".git", "node_modules", "target", ".venv", "venv"}
+IGNORED_DIRS = {".git", ".harness-state", "node_modules", "target", ".venv", "venv"}
 MARKDOWN_LINK = re.compile(r"!?\[[^]]*]\(([^)]+)\)")
 
 

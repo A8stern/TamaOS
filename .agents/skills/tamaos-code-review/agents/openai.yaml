@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Code Review"
+  short_description: "Coordinate a language-specific review profile"
+  default_prompt: "Use $tamaos-code-review to run the affected language's three review skills independently."

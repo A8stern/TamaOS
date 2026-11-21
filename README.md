@@ -50,3 +50,5 @@ make ci
 ```
 
 Контракт harness и правила регистрации будущих Rust, Python, JavaScript или других подпроектов описаны в [harness/README.md](harness/README.md).
+
+Первый переносимый Rust-каркас находится в `crates/tama-domain`; его архитектурные границы описаны в [docs/languages/rust/architecture.md](docs/languages/rust/architecture.md).

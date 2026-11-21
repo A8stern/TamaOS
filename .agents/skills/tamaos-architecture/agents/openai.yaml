@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Architecture"
+  short_description: "Coordinate language-specific architecture work"
+  default_prompt: "Use $tamaos-architecture to resolve the affected language architects and shape this design decision."

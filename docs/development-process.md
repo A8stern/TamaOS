@@ -9,6 +9,8 @@
 
 ## 2. Work item shape
 
+Use `$tamaos-task-strategist` to create this shape when a request crosses domains, has unclear ownership, or needs sequencing. A narrow task may be routed directly to its owner.
+
 Every implementation issue should contain:
 
 ```text
@@ -16,12 +18,15 @@ Outcome:
 Acceptance criteria:
 Known facts:
 Unknowns / risks:
+Architecture clearance: not-needed | aligned (<sources>) | user-decision-required
 Host verification:
 Hardware verification:
 Out of scope:
 ```
 
 If a task touches wiring, include the source for every pin and voltage claim and a pre-power continuity/voltage checklist.
+
+Every new implementation capability goes from task strategy to the affected language architect before coding. If it fits accepted architecture, record `aligned` and the applicable sources. If it requires or contradicts an architectural decision, stop at `user-decision-required`, present the options to the user, and record the accepted decision in architecture documentation or an ADR before implementation.
 
 ## 3. GitHub flow
 
@@ -31,6 +36,7 @@ If a task touches wiring, include the source for every pin and voltage claim and
 - Require passing checks and one review for firmware changes once CI is available.
 - Prefer squash merging so one issue-sized change becomes one main-branch commit.
 - Use draft pull requests for hardware experiments whose result is not yet known.
+- Before pushing a branch, run the affected language profile's three required review skills in three independent reviewers for the exact commit and run `make prepush`.
 
 Initial labels:
 
@@ -55,6 +61,8 @@ ci          all non-hardware checks used by GitHub Actions
 ```
 
 `flash` must never run as part of `check`, `test`, or `ci`. Do not add placeholder commands before the toolchain spike determines the actual build path.
+
+`make prepush` runs `make ci` and validates local review evidence for the current commit. Evidence must name one language profile, three distinct actual skill IDs for its correctness, architecture, and verification-risk slots, and three distinct reviewer IDs. The architecture report must name the task clearance and accepted architecture sources used for comparison. A mismatch is blocking and returns to implementation; if it exposes a genuinely new decision, it returns to the user before the architecture can change. A missing or partial language profile blocks review; there is no generic fallback. The three reviews are intentionally local and must not be moved into GitHub Actions.
 
 Register projects explicitly in `harness/projects`; never discover and execute arbitrary manifests recursively. The adapter contract and examples live in `harness/README.md`.
 
@@ -90,12 +98,11 @@ The primary agent owns the plan and integration. Delegate only independent resea
 
 For every agent-produced result, the primary agent must verify the cited source or run the relevant check before merging it into project truth.
 
-Role definitions and routing live in `docs/agents.md`. Engineering-system work uses the project skill `$tamaos-engineer`; language-specific rules belong to future language skills rather than this shared process.
+Role definitions and routing live in `docs/agents.md`. Unclear or multi-domain intake uses `$tamaos-task-strategist`; consequential design uses `$tamaos-architecture` plus each affected language architect; engineering-system work uses `$tamaos-engineer`; physical hardware work uses `$tamaos-hardware-engineer`; implementation uses `$tamaos-code` plus an applicable language skill; `$tamaos-code-review` owns the mandatory local review gate.
 
 ## 8. Next setup work
 
-1. Create the common code agent contract.
-2. Create the Rust language agent and run the toolchain spike.
-3. Record the platform decision and register the real firmware adapter.
-4. Add firmware-specific non-hardware checks to CI.
-5. After parts arrive, create one bring-up issue per peripheral.
+1. Run the Rust embedded toolchain spike and record the platform decision.
+2. Register the real firmware adapter.
+3. Add firmware-specific non-hardware checks to CI.
+4. After parts arrive, create one bring-up issue per peripheral.

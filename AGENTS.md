@@ -6,11 +6,18 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 
 ## Context routing
 
-- Use `$tamaos-engineer` for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, reliability, or hardware bring-up planning.
+- Use `$tamaos-task-strategist` before implementation when a request is new, ambiguous, multi-domain, or needs ownership and sequencing decisions. Skip it for an already narrow task with an obvious owner.
+- Route every new implementation capability through `$tamaos-architecture` before coding. It must obtain `aligned` clearance from each affected language architect; any new or conflicting architecture decision stops for user approval and documentation. There is no generic language-architecture fallback.
+- Use `$tamaos-engineer` for repository structure, harness, CI, GitHub workflow, toolchains, architecture process, or engineering reliability.
+- Use `$tamaos-hardware-engineer` for components, datasheets, power, signals, GPIO selection, wiring, measurements, and physical bring-up.
+- Use `$tamaos-code` for implementation, tests, refactors, and bug fixes. Combine it with the applicable language skill.
+- Use `$tamaos-rust` for Rust implementation and `$tamaos-rust-architect` for Rust architecture clearance.
+- Before any push, use `$tamaos-code-review` to run the affected language's registered correctness, architecture, and verification review skills in three independent local reviewers, then run `make prepush`. A complete language review profile is required; CI does not replace this gate.
 - Read `docs/architecture.md` when changing firmware boundaries or making an architectural decision.
+- Read `docs/architecture-principles.md` when establishing or revising a language architecture.
 - Read `docs/development-process.md` when changing the contribution or verification workflow.
 - Read `harness/README.md` when changing commands or registering a project.
-- For hardware work, read `docs/tamagotchi-components.md`.
+- For hardware work, use `$tamaos-hardware-engineer` and read `docs/tamagotchi-components.md`.
 - Agent roles and delegation boundaries are documented in `docs/agents.md`.
 
 ## Non-negotiable rules
@@ -25,11 +32,14 @@ TamaOS is a desktop virtual-pet and mini-console built on an ESP32-S3-DevKitC-1 
 
 ## Change workflow
 
-1. Restate the acceptance criteria and unknowns.
-2. Inspect existing code and decisions before proposing a new abstraction.
-3. Make one coherent change at a time.
-4. Run the relevant harness commands documented in `docs/development-process.md`.
-5. Report what was verified on the host, what was verified on hardware, and what remains assumed.
+1. For unclear or multi-domain work, use `$tamaos-task-strategist` to establish the execution route.
+2. Restate the acceptance criteria and unknowns.
+3. For new implementation capability, obtain architecture clearance before coding; stop for the user's decision when architecture is new or conflicting.
+4. Inspect existing code and decisions before proposing a new abstraction.
+5. Make one coherent change at a time.
+6. Run the relevant harness commands documented in `docs/development-process.md`.
+7. Commit locally, complete the three-lane review for that exact SHA, and run `make prepush` before pushing.
+8. Report what was verified on the host, what was verified on hardware, and what remains assumed.
 
 ## Architecture boundaries
 

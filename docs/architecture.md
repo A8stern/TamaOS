@@ -2,6 +2,8 @@
 
 Status: initial architecture for discussion. Hardware-dependent details are provisional until the delivered modules are inspected.
 
+Shared decision principles and the language-start checkpoint are defined in [architecture-principles.md](architecture-principles.md). Each implementation language must supply its own architect skill; the common coordinator does not replace language expertise.
+
 ## 1. Architectural drivers
 
 The first version optimizes for:

@@ -1,0 +1,3 @@
+[workspace]
+members = ["crates/tama-domain"]
+resolver = "2"

@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "languages": {
+    "rust": {
+      "correctness": "tamaos-rust-review-correctness",
+      "architecture": "tamaos-rust-review-architecture",
+      "verification-risk": "tamaos-rust-review-verification"
+    }
+  }
+}

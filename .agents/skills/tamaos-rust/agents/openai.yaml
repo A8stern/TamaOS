@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Rust"
+  short_description: "Implement Rust within TamaOS boundaries"
+  default_prompt: "Use $tamaos-rust with $tamaos-code to implement this Rust change."

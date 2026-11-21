@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Rust Verification Review"
+  short_description: "Check Rust evidence and risk coverage"
+  default_prompt: "Use $tamaos-rust-review-verification for the verification-risk lane of this immutable commit."

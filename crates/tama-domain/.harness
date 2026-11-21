@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+project=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+manifest="$project/Cargo.toml"
+
+case "$1" in
+  setup) command -v cargo >/dev/null && command -v rustfmt >/dev/null && command -v clippy-driver >/dev/null ;;
+  check) cargo fmt --manifest-path "$manifest" --all -- --check && cargo clippy --manifest-path "$manifest" --all-targets -- -D warnings ;;
+  test) cargo test --manifest-path "$manifest" ;;
+  build) cargo build --manifest-path "$manifest" ;;
+  firmware|size|flash|monitor) echo "tama-domain has no hardware action: $1" >&2; exit 2 ;;
+  *) echo "unsupported action: $1" >&2; exit 2 ;;
+esac
