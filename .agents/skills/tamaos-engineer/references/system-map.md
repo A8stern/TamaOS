@@ -48,7 +48,7 @@ The stable root commands are `make setup`, `make check`, `make test`, `make buil
 
 `make setup` enables the tracked local pre-push hook. Review evidence is stored under ignored `.harness-state/` and is never produced by CI.
 
-The project registry is currently empty because no firmware workspace or verified toolchain exists yet. The first real project is expected to be the ESP32-S3 firmware after the toolchain spike.
+The project registry contains the host-buildable `tama-domain` Rust crate. No firmware project or verified embedded toolchain exists yet; the ESP32-S3 firmware follows the toolchain spike.
 
 GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 
@@ -60,8 +60,10 @@ GitHub Actions runs `make ci` on pushes and pull requests targeting `main`.
 - `$tamaos-hardware-engineer`: component identification, electrical constraints, wiring, GPIO selection, measurements, and physical bring-up.
 - `$tamaos-code`: language-independent implementation and test completeness.
 - `$tamaos-code-review`: coordinator and common contract for three independent local review slots required before push.
-- Future language agents: language/toolchain-specific implementation, one architect skill, and three concrete review skills, beginning with Rust.
+- `$tamaos-rust`: Rust implementation within the accepted TamaOS boundaries.
+- `$tamaos-rust-architect`: Rust architecture clearance.
+- `$tamaos-rust-review-*`: registered correctness, architecture, and verification-risk review lanes.
 
-No language architecture or review profile is registered yet. Until the Rust agent supplies its architect and all three actual review skill IDs, the corresponding workflows are intentionally incomplete and must not fall back to generic prompts.
+Rust architecture and review profiles are registered. Other languages remain blocked until they supply their own architect and all three review skill IDs; they must not fall back to generic prompts.
 
 The primary agent owns integration and user communication. A specialist returns evidence and recommendations; it does not silently expand scope or mutate external systems.

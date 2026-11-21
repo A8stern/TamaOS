@@ -102,7 +102,7 @@ Role definitions and routing live in `docs/agents.md`. Unclear or multi-domain i
 
 ## 8. Next setup work
 
-1. Create the Rust language agent, its architect skill, and its three-skill review profile; then run the toolchain spike.
-2. Record the platform decision and register the real firmware adapter.
+1. Run the Rust embedded toolchain spike and record the platform decision.
+2. Register the real firmware adapter.
 3. Add firmware-specific non-hardware checks to CI.
 4. After parts arrive, create one bring-up issue per peripheral.

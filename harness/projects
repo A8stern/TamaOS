@@ -1,2 +1,3 @@
 # name<TAB>path
 # firmware<TAB>apps/firmware
+domain	crates/tama-domain

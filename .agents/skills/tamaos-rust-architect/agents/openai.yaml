@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Rust Architect"
+  short_description: "Approve Rust architecture before implementation"
+  default_prompt: "Use $tamaos-rust-architect through $tamaos-architecture to assess this Rust design."

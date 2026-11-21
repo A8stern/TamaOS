@@ -48,13 +48,15 @@ The reviewers inspect the same commit independently, do not see one another's re
 
 Invoke `$tamaos-architecture` for consequential design work before implementation. It applies the shared principles in `docs/architecture-principles.md`, identifies affected languages, and requires one concrete architect skill per language. It coordinates cross-language contracts but is not itself a generic language architect.
 
-Each language architect owns idiomatic module boundaries, public contracts, runtime/error/concurrency/resource policy, dependency choices, and test seams for that language. No language architect is registered yet; the Rust language role will provide the first one. Missing language architecture must remain visible rather than being filled with a generic prompt.
+Each language architect owns idiomatic module boundaries, public contracts, runtime/error/concurrency/resource policy, dependency choices, and test seams for that language. Rust uses `$tamaos-rust-architect`. Missing language architecture must remain visible rather than being filled with a generic prompt.
 
 Architecture design and architecture review are separate but connected. The language architect issues the pre-implementation clearance. The independent architecture reviewer then consults that architect's recorded clearance and canonical sources and compares the immutable commit against them. A mismatch is returned as a blocking finding with the expected basis, observed implementation, mismatch, and required correction. Neither role may approve a new architecture after the fact: a new decision returns to the user first.
 
-### Future language agents
+### Rust language agents
 
-Will add language-specific implementation knowledge, commands, one architect skill, and a complete three-skill review profile. The first planned language role is Rust. A language agent must use the common code and architecture contracts plus the project `.harness` adapter rather than creating another workflow.
+Rust implementation uses `$tamaos-rust` with `$tamaos-code`. Architecture uses `$tamaos-rust-architect`. The local review profile uses `$tamaos-rust-review-correctness`, `$tamaos-rust-review-architecture`, and `$tamaos-rust-review-verification`. Their selected upstream sources and pinned revisions are recorded in `docs/rust-skill-sources.md`.
+
+Future language agents must provide the same four language-specific roles and use the common code and architecture contracts plus a project `.harness` adapter rather than creating another workflow.
 
 ## Delegation contract
 

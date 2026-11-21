@@ -1,0 +1,4 @@
+interface:
+  display_name: "TamaOS Rust Correctness Review"
+  short_description: "Find concrete Rust behavior defects"
+  default_prompt: "Use $tamaos-rust-review-correctness for the correctness lane of this immutable commit."

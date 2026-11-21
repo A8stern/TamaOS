@@ -21,7 +21,7 @@ Own code changes from acceptance criteria through verified local commit. Use a l
 ## Ownership boundaries
 
 - `$tamaos-engineer` owns the repository harness, CI, GitHub workflow, toolchains, and integration policy.
-- The future architecture skill will own cross-component design choices and ADR recommendations.
+- `$tamaos-architecture` and the applicable language architect own cross-component design choices and ADR recommendations.
 - Language skills own language idioms, compiler/linter configuration, dependency details, and language-specific testing.
 - This skill owns implementation completeness and the handoff into local review.
 

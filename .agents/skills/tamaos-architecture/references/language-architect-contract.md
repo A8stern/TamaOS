@@ -55,4 +55,4 @@ If resolving the finding requires a new architectural choice, implementation sto
 
 ## Registration
 
-No language architect profile is registered yet. When a language agent is created, record its concrete architect skill alongside that language's implementation and review skills in the agent routing documentation. A missing profile blocks architecture work for that language.
+Rust is registered as `$tamaos-rust-architect`. When another language agent is created, record its concrete architect skill alongside that language's implementation and review skills in the agent routing documentation. A missing profile blocks architecture work for that language.
